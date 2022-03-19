@@ -1,4 +1,5 @@
-import {AxiosPromise} from 'axios';
+import {AxiosPromise, AxiosResponse} from 'axios';
+import {Transaction, TransactionResponse} from '../interfaces/transaction';
 import {
   UserCreateRequest,
   UserCreateResponce,
@@ -24,11 +25,18 @@ export const signInRequest = (
   return HttpService.post(ENDPOINTS.AUTH_LOGIN, {data});
 };
 
-export const getTransactionPerMounth = (
+export const getTransactionPerMounth = async (
   start: string,
   end: string,
-): AxiosPromise<{total: number; date: string}[]> => {
-  return HttpService.get(
-    `${ENDPOINTS.TRANSCTIONS}?date_end=${end}&date_start=${start}`,
+): Promise<TransactionResponse> => {
+  const {data} = await HttpService.get(
+    `${ENDPOINTS.TRANSCTIONS}/${start}/${end}`,
   );
+  return data;
+};
+
+export const deleteTransaction = (
+  id: number,
+): Promise<AxiosResponse<Transaction>> => {
+  return HttpService.delete(`${ENDPOINTS.TRANSCTIONS}/${id}`);
 };

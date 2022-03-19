@@ -6,8 +6,10 @@ import {Provider} from 'react-redux';
 import store from './src/store/store';
 import {injectStore} from './src/services/HttpService';
 import SplashScreen from 'react-native-splash-screen';
+import {QueryClient, QueryClientProvider} from 'react-query';
 
 injectStore(store);
+const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
@@ -15,11 +17,13 @@ const App = () => {
   }, []);
 
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={myTheme}>
-        <Navigator />
-      </ThemeProvider>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <ThemeProvider theme={myTheme}>
+          <Navigator />
+        </ThemeProvider>
+      </Provider>
+    </QueryClientProvider>
   );
 };
 

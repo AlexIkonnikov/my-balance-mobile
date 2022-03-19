@@ -5,7 +5,7 @@ import styled from 'styled-components/native';
 const ReportScreen: FC = () => {
   return (
     <Contaner>
-      <Text>ReportScreen</Text>
+      <Text>Раздел в разработке</Text>
     </Contaner>
   );
 };

@@ -26,7 +26,7 @@ const SignInScreen: FC<SignInScreenProps> = ({navigation}) => {
     mode: 'onChange',
   });
 
-  const goToSignUp = () => {
+  const goToSignUpScreen = () => {
     navigation.navigate(Routes.SignUpScreen);
   };
 
@@ -88,11 +88,11 @@ const SignInScreen: FC<SignInScreenProps> = ({navigation}) => {
                 disabled={!formState.isValid}
               />
             </FormWrapper>
-            <Footer>
-              <SignUpButton onPress={goToSignUp}>
+            {/* <Footer>
+              <SignUpButton onPress={goToSignUpScreen}>
                 <StyledText>Зарегистрироваться</StyledText>
               </SignUpButton>
-            </Footer>
+            </Footer> */}
           </Inner>
         </TouchableWithoutFeedback>
       </Container>
