@@ -9,20 +9,20 @@ import {
   Cloth,
   Rent,
   Presents,
-} from '../../../../../components/categoryIcon';
-import {Money} from '../../../../../components/icon';
+} from '../../../../../../../components/categoryIcon';
+import {Money} from '../../../../../../../components/icon';
 import {
   TransactionResponse,
   Transaction,
   Category,
-} from '../../../../../interfaces/transaction';
-import {getDateByFormat} from '../../../../../utils/date';
+} from '../../../../../../../interfaces/transaction';
+import {getDateByFormat} from '../../../../../../../utils/date';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import {ActivityIndicator, Animated} from 'react-native';
 import {BaseButton} from 'react-native-gesture-handler';
 import {useMutation, useQueryClient} from 'react-query';
-import {deleteTransaction} from '../../../../../api';
-import {queryKeys} from '../../../../../constants/queryKeys';
+import {deleteTransaction} from '../../../../../../../api';
+import {queryKeys} from '../../../../../../../constants/queryKeys';
 
 const icons = {
   [Category.OTHER]: <Money />,

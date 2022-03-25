@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
 import {View} from 'react-native';
 import styled, {css} from 'styled-components/native';
-import {BaseButton, InputField} from '../../../components';
-import {useAppDispatch, useAppSelector} from '../../../hooks';
-import {userActions, userSelectors} from '../../../store/user';
+import {BaseButton, InputField} from '../../../../components';
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
+import {userActions, userSelectors} from '../../../../store/user';
 
 const ProfileScreen: FC = () => {
   const dispatch = useAppDispatch();
