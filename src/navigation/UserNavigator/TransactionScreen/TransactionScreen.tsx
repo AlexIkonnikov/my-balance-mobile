@@ -3,13 +3,15 @@ import React, {FC} from 'react';
 import {FlatList, ListRenderItem, StyleSheet, View} from 'react-native';
 import {useQuery} from 'react-query';
 import styled from 'styled-components/native';
-import {getTransactionPerMounth} from '../../../../../api';
-import {BaseButton} from '../../../../../components';
-import {queryKeys} from '../../../../../constants/queryKeys';
-import {Transaction} from '../../../../../interfaces/transaction';
+import {getTransactionPerMounth} from '../../../api';
+import {BaseButton} from '../../../components';
+import {queryKeys} from '../../../constants/queryKeys';
+import {Transaction} from '../../../interfaces/transaction';
 import {TransactionCard} from './components/TransactionCard';
 
-const TransactionScreen: FC = () => {
+import {TransactionScreenProps} from './../UserNavigator';
+
+const TransactionScreen: FC<TransactionScreenProps> = () => {
   const currentDate = dayjs();
   const start = currentDate.startOf('month').format('YYYY-MM-DD');
   const end = currentDate.endOf('month').format('YYYY-MM-DD');

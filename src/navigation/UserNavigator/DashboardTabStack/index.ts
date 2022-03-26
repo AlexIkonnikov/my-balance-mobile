@@ -1,1 +1,1 @@
-export {default} from './DashboardTabStack';
+export {default as DashboardTabStack} from './DashboardTabStack';

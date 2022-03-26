@@ -1,21 +1,29 @@
 import React, {FC} from 'react';
-import {DashboardScreenProps} from '../UserNavigator';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {DashboardScreenProps, UserStackNavigator} from '../UserNavigator';
+import {
+  createBottomTabNavigator,
+  BottomTabScreenProps,
+} from '@react-navigation/bottom-tabs';
 import Routes from '../../routes';
-import ProfileScreen from './ProfileScreen';
-import TransactionsScreen from './TransactionStack';
+import {ProfileScreen} from './ProfileScreen';
 import {bottomOption} from './options';
 import {Money, Profile} from '../../../components/icon';
+import {StatisticScreen} from './ StatisticScreen';
 
-const Dashboard = createBottomTabNavigator();
+type DashboardTabStackProps = UserStackNavigator & {
+  [Routes.StatisticScreen]: undefined;
+  [Routes.ProfileScreen]: undefined;
+};
+
+const Dashboard = createBottomTabNavigator<DashboardTabStackProps>();
 
 const DashboardTabStack: FC<DashboardScreenProps> = () => {
   return (
     <Dashboard.Navigator initialRouteName={Routes.ProfileScreen}>
       <Dashboard.Screen
-        name={Routes.TransactionStack}
-        component={TransactionsScreen}
-        options={bottomOption('Транзакции', Money)}
+        name={Routes.StatisticScreen}
+        component={StatisticScreen}
+        options={bottomOption('Деньги', Money)}
       />
       <Dashboard.Screen
         name={Routes.ProfileScreen}
@@ -25,5 +33,15 @@ const DashboardTabStack: FC<DashboardScreenProps> = () => {
     </Dashboard.Navigator>
   );
 };
+
+export type StatisticScreenProps = BottomTabScreenProps<
+  DashboardTabStackProps,
+  Routes.StatisticScreen
+>;
+
+export type ProfileScreenProps = BottomTabScreenProps<
+  DashboardTabStackProps,
+  Routes.ProfileScreen
+>;
 
 export default DashboardTabStack;
