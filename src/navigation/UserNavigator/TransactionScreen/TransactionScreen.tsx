@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import React, {FC} from 'react';
-import {FlatList, ListRenderItem, StyleSheet, View} from 'react-native';
+import {FlatList, ListRenderItem, StyleSheet, Text, View} from 'react-native';
 import {useQuery} from 'react-query';
 import styled from 'styled-components/native';
 import {getTransactionPerMounth} from '../../../api';
@@ -10,14 +10,19 @@ import {Transaction} from '../../../interfaces/transaction';
 import {TransactionCard} from './components/TransactionCard';
 
 import {TransactionScreenProps} from './../UserNavigator';
+import Routes from '../../routes';
 
-const TransactionScreen: FC<TransactionScreenProps> = () => {
+const TransactionScreen: FC<TransactionScreenProps> = ({navigation}) => {
   const currentDate = dayjs();
   const start = currentDate.startOf('month').format('YYYY-MM-DD');
   const end = currentDate.endOf('month').format('YYYY-MM-DD');
   const {data, refetch, isLoading} = useQuery(queryKeys.TRANSACTIONS, () =>
     getTransactionPerMounth(start, end),
   );
+
+  const showTransactionForm = () => {
+    navigation.navigate(Routes.TransactionForm);
+  };
 
   const listEmptyComponent = () => (
     <Center>
@@ -31,7 +36,25 @@ const TransactionScreen: FC<TransactionScreenProps> = () => {
 
   return (
     <Contaner>
-      <Title>За текущий месяц</Title>
+      <Title>За текущий месяц:</Title>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          padding: 20,
+        }}>
+        <Text>Доход: {data?.income}</Text>
+        <Text>Расход: {data?.expenses}</Text>
+        <Text>
+          Итого:{' '}
+          {data?.income && data?.expenses ? data?.income + data?.expenses : 0}
+        </Text>
+      </View>
+      {/* <Title>{data?.income}</Title>
+      <Title>{data?.expenses}</Title>
+      <Title>
+        {data?.income && data?.expenses ? data?.income + data?.expenses : 0}
+      </Title> */}
       <View style={listWrapper}>
         <FlatList
           data={data?.transactions}
@@ -45,7 +68,7 @@ const TransactionScreen: FC<TransactionScreenProps> = () => {
           showsVerticalScrollIndicator={false}
           onResponderEnd={() => refetch()}
         />
-        <AddButton title="+" />
+        <AddButton title="+" onPress={showTransactionForm} />
       </View>
     </Contaner>
   );

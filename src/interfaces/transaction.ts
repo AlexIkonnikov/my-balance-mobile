@@ -1,9 +1,12 @@
-export interface Transaction {
+export interface Transaction extends CreateTransactionDto {
+  id: number;
+}
+
+export interface CreateTransactionDto {
   total: number;
   date: string;
   category: Category;
   comment: string;
-  id: number;
 }
 
 export interface TransactionResponse {

@@ -1,5 +1,9 @@
 import {AxiosPromise, AxiosResponse} from 'axios';
-import {Transaction, TransactionResponse} from '../interfaces/transaction';
+import {
+  CreateTransactionDto,
+  Transaction,
+  TransactionResponse,
+} from '../interfaces/transaction';
 import {
   UserCreateRequest,
   UserCreateResponce,
@@ -39,4 +43,10 @@ export const deleteTransaction = (
   id: number,
 ): Promise<AxiosResponse<Transaction>> => {
   return HttpService.delete(`${ENDPOINTS.TRANSCTIONS}/${id}`);
+};
+
+export const createTransaction = (
+  data: CreateTransactionDto,
+): Promise<AxiosResponse<Transaction>> => {
+  return HttpService.post(ENDPOINTS.TRANSCTIONS, {data});
 };
