@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import { DashboardScreenProps, UserStackNavigator } from '../UserNavigator';
 import { createBottomTabNavigator, BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import Routes from '../../routes';
+import Routes from 'navigation/routes';
 import { ProfileScreen } from './ProfileScreen';
 import { bottomOption } from './options';
-import { Money, Profile } from '../../../components/icon';
+import { Money, Profile } from 'components/icon';
 import { StatisticScreen } from './ StatisticScreen';
 
 type DashboardTabStackProps = UserStackNavigator & {

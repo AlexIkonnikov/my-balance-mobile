@@ -1,7 +1,7 @@
 import { AxiosPromise, AxiosResponse } from 'axios';
-import { CreateTransactionDto, Transaction, TransactionResponse } from '../interfaces/transaction';
-import { UserCreateRequest, UserCreateResponce, UserLoginRequest } from '../interfaces/user';
-import { HttpService } from '../services';
+import { CreateTransactionDto, Transaction, TransactionResponse } from 'interfaces/transaction';
+import { UserCreateRequest, UserCreateResponce, UserLoginRequest } from 'interfaces/user';
+import { HttpService } from 'services';
 
 const ENDPOINTS = {
   AUTH_REGISTRATION: 'auth/registration',

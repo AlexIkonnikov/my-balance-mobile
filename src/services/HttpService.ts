@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { StoreType } from '../store/store';
+import { StoreType } from 'store/store';
 import { API_URL } from 'react-native-dotenv';
 
 let store: StoreType;

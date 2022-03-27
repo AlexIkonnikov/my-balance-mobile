@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { signUpRequest, signInRequest } from '../../api';
-import { UserCreateRequest, UserLoginRequest } from '../../interfaces/user';
+import { signUpRequest, signInRequest } from 'api';
+import { UserCreateRequest, UserLoginRequest } from 'interfaces/user';
 
 export const signUp = createAsyncThunk('user/registration', async (user: UserCreateRequest) => {
   const { data } = await signUpRequest(user);

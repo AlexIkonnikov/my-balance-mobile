@@ -4,10 +4,10 @@ import { useForm, Controller } from 'react-hook-form';
 import { Animated, StyleSheet, TextInput, View, Dimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useMutation } from 'react-query';
-import { onChangeMiddleware } from '../../../components/NumPad';
-import { createTransaction } from '../../../api';
-import { BaseButton, CategoryPicker, DateInput, NumPad } from '../../../components';
-import { Category } from '../../../interfaces/transaction';
+import { onChangeMiddleware } from 'components/NumPad';
+import { createTransaction } from 'api';
+import { BaseButton, CategoryPicker, DateInput, NumPad } from 'components';
+import { Category } from 'interfaces/transaction';
 import { TransactionFormProps } from '../UserNavigator';
 
 type TransactionFormField = {

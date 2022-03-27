@@ -16,5 +16,24 @@ module.exports = {
         verbose: false,
       },
     ],
+    [
+      'module-resolver',
+      {
+        root: ['.'],
+        alias: {
+          api: ['./src/api'],
+          components: ['./src/components'],
+          constants: ['./src/constants'],
+          hooks: ['./src/hooks'],
+          interfaces: ['./src/interfaces'],
+          navigation: ['./src/navigation'],
+          services: ['./src/services'],
+          store: ['./src/store'],
+          theme: ['./src/theme'],
+          utils: ['./src/utils'],
+        },
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    ],
   ],
 };

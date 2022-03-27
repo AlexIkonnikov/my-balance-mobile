@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Platform, TouchableOpacity, TouchableWithoutFeedback, Keyboard, StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
-import { BaseButton, InputField } from '../../../components';
-import { useAppDispatch } from '../../../hooks';
-import { UserCreateRequest } from '../../../interfaces/user';
-import { userActions } from '../../../store/user';
-import Routes from '../../routes';
+import { BaseButton, InputField } from 'components';
+import { useAppDispatch } from 'hooks';
+import { UserCreateRequest } from 'interfaces/user';
+import { userActions } from 'store/user';
+import Routes from 'navigation/routes';
 import { SignUpScreenProps } from '../GuestNavigator';
 
 const SignUpScreen: FC<SignUpScreenProps> = ({ navigation }) => {

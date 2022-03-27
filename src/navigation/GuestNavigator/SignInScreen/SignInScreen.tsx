@@ -2,11 +2,11 @@ import React, { FC, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Keyboard, StatusBar, TouchableWithoutFeedback, Platform } from 'react-native';
 import styled, { useTheme } from 'styled-components/native';
-import { BaseButton, InputField } from '../../../components';
-import { Coin } from '../../../components/icon';
-import { useAppDispatch } from '../../../hooks';
-import { UserLoginRequest } from '../../../interfaces/user';
-import { userActions } from '../../../store/user';
+import { BaseButton, InputField } from 'components';
+import { Coin } from 'components/icon';
+import { useAppDispatch } from 'hooks';
+import { UserLoginRequest } from 'interfaces/user';
+import { userActions } from 'store/user';
 import { SignInScreenProps } from '../GuestNavigator';
 
 const SignInScreen: FC<SignInScreenProps> = () => {

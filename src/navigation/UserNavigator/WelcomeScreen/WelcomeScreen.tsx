@@ -1,9 +1,9 @@
 import React, { FC, useEffect } from 'react';
 import { Animated } from 'react-native';
 import styled from 'styled-components/native';
-import { useAppSelector } from '../../../hooks';
-import { userSelectors } from '../../../store/user';
-import Routes from '../../routes';
+import { useAppSelector } from 'hooks';
+import { userSelectors } from 'store/user';
+import Routes from 'navigation/routes';
 import { WelcomeScreenProps } from '../UserNavigator';
 
 const WelcomeScreen: FC<WelcomeScreenProps> = ({ navigation }) => {

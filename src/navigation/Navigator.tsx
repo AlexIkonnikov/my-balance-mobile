@@ -1,9 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import { useAppSelector } from '../hooks';
-import { userSelectors } from '../store/user';
 import GuestNavigator from './GuestNavigator';
 import UserNavigator from './UserNavigator';
+import { useAppSelector } from 'hooks';
+import { userSelectors } from 'store/user';
 
 function Navigator() {
   const isAuth = useAppSelector(userSelectors.selectToken);

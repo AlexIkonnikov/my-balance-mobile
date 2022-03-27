@@ -3,14 +3,14 @@ import React, { FC } from 'react';
 import { FlatList, ListRenderItem, StyleSheet, Text, View } from 'react-native';
 import { useQuery } from 'react-query';
 import styled from 'styled-components/native';
-import { getTransactionPerMounth } from '../../../api';
-import { BaseButton } from '../../../components';
-import { queryKeys } from '../../../constants/queryKeys';
-import { Transaction } from '../../../interfaces/transaction';
+import { getTransactionPerMounth } from 'api';
+import { BaseButton } from 'components';
+import { queryKeys } from 'constants/queryKeys';
+import { Transaction } from 'interfaces/transaction';
 import { TransactionCard } from './components/TransactionCard';
 
 import { TransactionScreenProps } from './../UserNavigator';
-import Routes from '../../routes';
+import Routes from 'navigation/routes';
 
 const TransactionScreen: FC<TransactionScreenProps> = ({ navigation }) => {
   const currentDate = dayjs();
