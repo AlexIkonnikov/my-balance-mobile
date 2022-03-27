@@ -32,13 +32,29 @@ const TransactionScreen: FC<TransactionScreenProps> = ({ navigation }) => {
     return <TransactionCard {...item} />;
   };
 
+  const color = () => {
+    if ((data?.income ?? 0) + (data?.expenses ?? 0) === 0) {
+      return undefined;
+    }
+    return (data?.income ?? 0) + (data?.expenses ?? 0) > 0 ? green : red;
+  };
+
   return (
     <Contaner>
       <Title>За текущий месяц:</Title>
       <Wrapper>
-        <Text>Доход: {data?.income}</Text>
-        <Text>Расход: {data?.expenses}</Text>
-        <Text>Итого: {(data?.income ?? 0) + (data?.expenses ?? 0)}</Text>
+        <View style={row}>
+          <Text style={[text, green]}>Доход: </Text>
+          <Text style={[text, green]}>{data?.income}</Text>
+        </View>
+        <View style={row}>
+          <Text style={[text, red]}>Расход: </Text>
+          <Text style={[text, red]}>{data?.expenses}</Text>
+        </View>
+        <View style={row}>
+          <Text style={[text, color()]}>Итого: </Text>
+          <Text style={[text, color()]}>{(data?.income ?? 0) + (data?.expenses ?? 0)}</Text>
+        </View>
       </Wrapper>
       <View style={listWrapper}>
         <FlatList
@@ -59,10 +75,15 @@ const TransactionScreen: FC<TransactionScreenProps> = ({ navigation }) => {
   );
 };
 
-const { list, listWrapper } = StyleSheet.create({
+const { list, listWrapper, row, text, green, red } = StyleSheet.create({
   list: {
     flex: 1,
     backgroundColor: 'white',
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
   listWrapper: {
     flex: 1,
@@ -71,6 +92,17 @@ const { list, listWrapper } = StyleSheet.create({
     backgroundColor: 'white',
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
+  },
+  text: {
+    fontSize: 13,
+    fontWeight: 'bold',
+    color: 'black',
+  },
+  green: {
+    color: '#37d179',
+  },
+  red: {
+    color: '#E8502F',
   },
 });
 
