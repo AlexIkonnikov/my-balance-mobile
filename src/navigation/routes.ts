@@ -7,9 +7,13 @@ enum Routes {
 
   /* TABS */
   DashboardTabStack = 'DashboardTabStack',
+
   ProfileScreen = 'ProfileScreen',
-  ReportScreen = 'ReportScreen',
-  TransactionsScreen = 'TransactionsScreen',
+
+  StatisticScreen = 'StatisticScreen',
+  TransactionScreen = 'TransactionScreen',
+  TransactionForm = 'TransactionForm',
+  BoardScreen = 'BoardScreen',
 }
 
 export default Routes;

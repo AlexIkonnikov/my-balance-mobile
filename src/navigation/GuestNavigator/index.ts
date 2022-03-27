@@ -1,1 +1,1 @@
-export {default} from './GuestNavigator';
+export { default } from './GuestNavigator';

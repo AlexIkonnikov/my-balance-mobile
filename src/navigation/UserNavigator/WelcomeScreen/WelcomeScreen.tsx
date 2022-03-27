@@ -1,13 +1,13 @@
-import React, {FC, useEffect} from 'react';
-import {Animated} from 'react-native';
+import React, { FC, useEffect } from 'react';
+import { Animated } from 'react-native';
 import styled from 'styled-components/native';
-import {useAppSelector} from '../../../hooks';
-import {userSelectors} from '../../../store/user';
-import Routes from '../../routes';
-import {WelcomeScreenProps} from '../UserNavigator';
+import { useAppSelector } from 'hooks';
+import { userSelectors } from 'store/user';
+import Routes from 'navigation/routes';
+import { WelcomeScreenProps } from '../UserNavigator';
 
-const WelcomeScreen: FC<WelcomeScreenProps> = ({navigation}) => {
-  const {name, patronymic} = useAppSelector(userSelectors.selectName);
+const WelcomeScreen: FC<WelcomeScreenProps> = ({ navigation }) => {
+  const { name, patronymic } = useAppSelector(userSelectors.selectName);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -28,7 +28,7 @@ const WelcomeScreen: FC<WelcomeScreenProps> = ({navigation}) => {
 };
 
 const Container = styled.View`
-  background-color: ${({theme: {colors}}) => colors.white};
+  background-color: ${({ theme: { colors } }) => colors.white};
   flex-grow: 1;
   justify-content: center;
   align-items: center;
@@ -37,7 +37,7 @@ const Container = styled.View`
 
 const Greetings = styled.Text`
   font-size: 30px;
-  color: ${({theme: {colors}}) => colors.black};
+  color: ${({ theme: { colors } }) => colors.black};
   font-weight: bold;
   text-align: center;
 `;

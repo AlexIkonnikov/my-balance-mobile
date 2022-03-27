@@ -1,6 +1,6 @@
-import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
-import {StoreType} from '../store/store';
-import {API_URL} from 'react-native-dotenv';
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import { StoreType } from 'store/store';
+import { API_URL } from 'react-native-dotenv';
 
 let store: StoreType;
 export const injectStore = (_store: StoreType): void => {
@@ -17,7 +17,7 @@ class HttpService {
       },
     });
 
-    this.instance.interceptors.request.use(config => {
+    this.instance.interceptors.request.use((config) => {
       const token = store.getState().user.token;
       if (token && config.headers) {
         config.headers.authorization = `Bearer ${token}`;
@@ -26,7 +26,7 @@ class HttpService {
     });
   }
 
-  post(url: string, {data}: AxiosRequestConfig) {
+  post(url: string, { data }: AxiosRequestConfig) {
     return this.instance.post(url, data);
   }
 
@@ -34,7 +34,7 @@ class HttpService {
     return this.instance.get(url);
   }
 
-  patch(url: string, {data}: AxiosRequestConfig) {
+  patch(url: string, { data }: AxiosRequestConfig) {
     return this.instance.patch(url, data);
   }
 
