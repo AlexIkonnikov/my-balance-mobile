@@ -1,10 +1,10 @@
-import React, {FC} from 'react';
-import {ScrollView, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import React, { FC } from 'react';
+import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
-import {StatisticScreenProps} from './../DashboardTabStack';
+import { StatisticScreenProps } from './../DashboardTabStack';
 import Routes from './../../../routes';
 
-const StatisticScreen: FC<StatisticScreenProps> = ({navigation}) => {
+const StatisticScreen: FC<StatisticScreenProps> = ({ navigation }) => {
   const showPerMonthStatistic = () => {
     navigation.navigate(Routes.TransactionScreen);
   };
@@ -35,15 +35,15 @@ const StatisticScreen: FC<StatisticScreenProps> = ({navigation}) => {
 const StyledText = styled.Text`
   font-size: 18px;
   font-weight: 400;
-  color: ${({theme}) => theme.colors.black};
+  color: ${({ theme }) => theme.colors.black};
 `;
 
 const styles = StyleSheet.create({
-  p20: {padding: 20},
+  p20: { padding: 20 },
   btn: {
     backgroundColor: 'white',
     elevation: 10,
-    shadowOffset: {width: 0, height: 0},
+    shadowOffset: { width: 0, height: 0 },
     shadowColor: 'black',
     shadowOpacity: 0.5,
     shadowRadius: 10,

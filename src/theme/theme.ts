@@ -13,4 +13,4 @@ const myTheme = {
 
 export type MyTheme = typeof myTheme;
 
-export {myTheme};
+export { myTheme };

@@ -1,2 +1,2 @@
-export {default} from './NumPad';
-export {default as onChangeMiddleware} from './onChangeMiddleware';
+export { default } from './NumPad';
+export { default as onChangeMiddleware } from './onChangeMiddleware';

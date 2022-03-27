@@ -1,13 +1,8 @@
 import * as React from 'react';
-import Svg, {SvgProps, Path} from 'react-native-svg';
+import Svg, { SvgProps, Path } from 'react-native-svg';
 
 const FastFood = (props: SvgProps) => (
-  <Svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={40}
-    height={40}
-    viewBox="0 0 30 30"
-    {...props}>
+  <Svg xmlns="http://www.w3.org/2000/svg" width={40} height={40} viewBox="0 0 30 30" {...props}>
     <Path
       style={{
         color: '#000',

@@ -1,1 +1,1 @@
-export {default as StatisticScreen} from './ StatisticScreen';
+export { default as StatisticScreen } from './ StatisticScreen';

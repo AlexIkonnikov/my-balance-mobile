@@ -1,1 +1,1 @@
-export {default} from './CategoryPicker';
+export { default } from './CategoryPicker';

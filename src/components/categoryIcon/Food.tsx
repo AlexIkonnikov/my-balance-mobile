@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Svg, {SvgProps, G, Path} from 'react-native-svg';
+import Svg, { SvgProps, G, Path } from 'react-native-svg';
 /* SVGR has dropped some elements not supported by react-native-svg: title */
 
 const Food = (props: SvgProps) => (

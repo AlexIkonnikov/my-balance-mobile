@@ -1,36 +1,26 @@
-import React, {FC, useState} from 'react';
-import {useForm, Controller} from 'react-hook-form';
-import {
-  Keyboard,
-  StatusBar,
-  TouchableWithoutFeedback,
-  Platform,
-} from 'react-native';
-import styled, {useTheme} from 'styled-components/native';
-import {BaseButton, InputField} from '../../../components';
-import {Coin} from '../../../components/icon';
-import {useAppDispatch} from '../../../hooks';
-import {UserLoginRequest} from '../../../interfaces/user';
-import {userActions} from '../../../store/user';
-import Routes from '../../routes';
-import {SignInScreenProps} from '../GuestNavigator';
+import React, { FC, useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { Keyboard, StatusBar, TouchableWithoutFeedback, Platform } from 'react-native';
+import styled, { useTheme } from 'styled-components/native';
+import { BaseButton, InputField } from '../../../components';
+import { Coin } from '../../../components/icon';
+import { useAppDispatch } from '../../../hooks';
+import { UserLoginRequest } from '../../../interfaces/user';
+import { userActions } from '../../../store/user';
+import { SignInScreenProps } from '../GuestNavigator';
 
-const SignInScreen: FC<SignInScreenProps> = ({navigation}) => {
+const SignInScreen: FC<SignInScreenProps> = () => {
   const [isLoading, setLoading] = useState(false);
-  const {signIn} = userActions;
+  const { signIn } = userActions;
   const {
-    colors: {white},
+    colors: { white },
   } = useTheme();
   const dispatch = useAppDispatch();
-  const {control, handleSubmit, formState} = useForm<UserLoginRequest>({
+  const { control, handleSubmit, formState } = useForm<UserLoginRequest>({
     mode: 'onChange',
   });
 
-  const goToSignUpScreen = () => {
-    navigation.navigate(Routes.SignUpScreen);
-  };
-
-  const submit = ({email, password}: UserLoginRequest) => {
+  const submit = ({ email, password }: UserLoginRequest) => {
     setLoading(true);
     dispatch(
       signIn({
@@ -52,7 +42,7 @@ const SignInScreen: FC<SignInScreenProps> = ({navigation}) => {
               <Icon />
               <Controller
                 control={control}
-                render={({field: {value, onChange}, fieldState: {error}}) => (
+                render={({ field: { value, onChange }, fieldState: { error } }) => (
                   <InputField
                     label="E-mail:"
                     placeholder="Введите email"
@@ -62,12 +52,12 @@ const SignInScreen: FC<SignInScreenProps> = ({navigation}) => {
                     editable={!isLoading}
                   />
                 )}
-                rules={{required: 'поле обязательно'}}
+                rules={{ required: 'поле обязательно' }}
                 name="email"
               />
               <Controller
                 control={control}
-                render={({field: {value, onChange}, fieldState: {error}}) => (
+                render={({ field: { value, onChange }, fieldState: { error } }) => (
                   <InputField
                     label="Пароль:"
                     placeholder="Введите пароль"
@@ -78,7 +68,7 @@ const SignInScreen: FC<SignInScreenProps> = ({navigation}) => {
                     editable={!isLoading}
                   />
                 )}
-                rules={{required: 'поле обязательно'}}
+                rules={{ required: 'поле обязательно' }}
                 name="password"
               />
               <SubmitButton
@@ -103,7 +93,7 @@ const SignInScreen: FC<SignInScreenProps> = ({navigation}) => {
 const Container = styled.KeyboardAvoidingView`
   flex: 1;
   padding: 30px;
-  background-color: ${({theme: {colors}}) => colors.white};
+  background-color: ${({ theme: { colors } }) => colors.white};
 `;
 
 const Inner = styled.View`
@@ -117,22 +107,22 @@ const SubmitButton = styled(BaseButton)`
   padding: 10px 0;
 `;
 
-const StyledText = styled.Text`
-  text-align: center;
-  font-size: 15px;
-  color: ${({theme: {colors}}) => colors.black};
-`;
+// const StyledText = styled.Text`
+//   text-align: center;
+//   font-size: 15px;
+//   color: ${({ theme: { colors } }) => colors.black};
+// `;
 
-const SignUpButton = styled.TouchableOpacity`
-  padding: 7px;
-  width: 70%;
-`;
+// const SignUpButton = styled.TouchableOpacity`
+//   padding: 7px;
+//   width: 70%;
+// `;
 
-const Footer = styled.View`
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-`;
+// const Footer = styled.View`
+//   display: flex;
+//   justify-content: center;
+//   flex-direction: row;
+// `;
 
 const FormWrapper = styled.View`
   flex-grow: 1;

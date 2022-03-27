@@ -1,1 +1,1 @@
-export {default} from './UserNavigator';
+export { default } from './UserNavigator';

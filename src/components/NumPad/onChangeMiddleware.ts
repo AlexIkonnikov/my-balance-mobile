@@ -6,11 +6,7 @@ interface IOnChangeMiddleware {
   callback: (result: string) => void;
 }
 
-const onChangeMiddleware = ({
-  existValue,
-  symbol,
-  callback,
-}: IOnChangeMiddleware): void => {
+const onChangeMiddleware = ({ existValue, symbol, callback }: IOnChangeMiddleware): void => {
   const chars = existValue ? existValue.toString().split('') : [];
 
   if (chars.length > 6 && symbol !== '<') {

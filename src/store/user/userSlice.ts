@@ -1,5 +1,5 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {signIn, signUp} from './thunks';
+import { createSlice } from '@reduxjs/toolkit';
+import { signIn, signUp } from './thunks';
 
 export interface UserSlice {
   email: string;
@@ -26,19 +26,19 @@ const userSlice = createSlice({
       return initialState;
     },
   },
-  extraReducers: builder => {
-    builder.addCase(signUp.fulfilled, (state, {payload}) => {
-      const {user, token} = payload;
-      state = {...user, token};
+  extraReducers: (builder) => {
+    builder.addCase(signUp.fulfilled, (state, { payload }) => {
+      const { user, token } = payload;
+      state = { ...user, token };
       return state;
     });
-    builder.addCase(signIn.fulfilled, (state, {payload}) => {
-      const {user, token} = payload;
-      state = {...user, token};
+    builder.addCase(signIn.fulfilled, (state, { payload }) => {
+      const { user, token } = payload;
+      state = { ...user, token };
       return state;
     });
   },
 });
 
-export const actions = {...userSlice.actions, signUp, signIn};
+export const actions = { ...userSlice.actions, signUp, signIn };
 export default userSlice.reducer;

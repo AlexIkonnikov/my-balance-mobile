@@ -1,24 +1,22 @@
 import dayjs from 'dayjs';
-import React, {FC} from 'react';
-import {FlatList, ListRenderItem, StyleSheet, Text, View} from 'react-native';
-import {useQuery} from 'react-query';
+import React, { FC } from 'react';
+import { FlatList, ListRenderItem, StyleSheet, Text, View } from 'react-native';
+import { useQuery } from 'react-query';
 import styled from 'styled-components/native';
-import {getTransactionPerMounth} from '../../../api';
-import {BaseButton} from '../../../components';
-import {queryKeys} from '../../../constants/queryKeys';
-import {Transaction} from '../../../interfaces/transaction';
-import {TransactionCard} from './components/TransactionCard';
+import { getTransactionPerMounth } from '../../../api';
+import { BaseButton } from '../../../components';
+import { queryKeys } from '../../../constants/queryKeys';
+import { Transaction } from '../../../interfaces/transaction';
+import { TransactionCard } from './components/TransactionCard';
 
-import {TransactionScreenProps} from './../UserNavigator';
+import { TransactionScreenProps } from './../UserNavigator';
 import Routes from '../../routes';
 
-const TransactionScreen: FC<TransactionScreenProps> = ({navigation}) => {
+const TransactionScreen: FC<TransactionScreenProps> = ({ navigation }) => {
   const currentDate = dayjs();
   const start = currentDate.startOf('month').format('YYYY-MM-DD');
   const end = currentDate.endOf('month').format('YYYY-MM-DD');
-  const {data, refetch, isLoading} = useQuery(queryKeys.TRANSACTIONS, () =>
-    getTransactionPerMounth(start, end),
-  );
+  const { data, refetch, isLoading } = useQuery(queryKeys.TRANSACTIONS, () => getTransactionPerMounth(start, end));
 
   const showTransactionForm = () => {
     navigation.navigate(Routes.TransactionForm);
@@ -30,37 +28,24 @@ const TransactionScreen: FC<TransactionScreenProps> = ({navigation}) => {
     </Center>
   );
 
-  const renderItem: ListRenderItem<Transaction> = ({item}) => {
+  const renderItem: ListRenderItem<Transaction> = ({ item }) => {
     return <TransactionCard {...item} />;
   };
 
   return (
     <Contaner>
       <Title>За текущий месяц:</Title>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          padding: 20,
-        }}>
+      <Wrapper>
         <Text>Доход: {data?.income}</Text>
         <Text>Расход: {data?.expenses}</Text>
-        <Text>
-          Итого:{' '}
-          {data?.income && data?.expenses ? data?.income + data?.expenses : 0}
-        </Text>
-      </View>
-      {/* <Title>{data?.income}</Title>
-      <Title>{data?.expenses}</Title>
-      <Title>
-        {data?.income && data?.expenses ? data?.income + data?.expenses : 0}
-      </Title> */}
+        <Text>Итого: {data?.income && data?.expenses ? data?.income + data?.expenses : 0}</Text>
+      </Wrapper>
       <View style={listWrapper}>
         <FlatList
           data={data?.transactions}
           style={list}
           renderItem={renderItem}
-          keyExtractor={item => item.id + ' '}
+          keyExtractor={(item) => item.id + ' '}
           onRefresh={refetch}
           refreshing={isLoading}
           ItemSeparatorComponent={() => <Separator />}
@@ -74,7 +59,7 @@ const TransactionScreen: FC<TransactionScreenProps> = ({navigation}) => {
   );
 };
 
-const {list, listWrapper} = StyleSheet.create({
+const { list, listWrapper } = StyleSheet.create({
   list: {
     flex: 1,
     backgroundColor: 'white',
@@ -93,16 +78,23 @@ const Contaner = styled.View`
   flex-grow: 1;
 `;
 
+const Wrapper = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+`;
+
 const Separator = styled.View`
   height: 1px;
   width: 100%;
-  background-color: ${({theme: {colors}}) => colors.black};
+  background-color: ${({ theme: { colors } }) => colors.black};
 `;
 
 const Title = styled.Text`
   font-size: 20px;
-  color: ${({theme: {colors}}) => colors.black};
+  color: ${({ theme: { colors } }) => colors.black};
   padding: 20px;
+  padding-bottom: 0;
 `;
 
 const Center = styled.View`
@@ -112,7 +104,7 @@ const Center = styled.View`
 `;
 
 const EmptyText = styled.Text`
-  color: ${({theme: {colors}}) => colors.black};
+  color: ${({ theme: { colors } }) => colors.black};
   font-weight: 700;
 `;
 
