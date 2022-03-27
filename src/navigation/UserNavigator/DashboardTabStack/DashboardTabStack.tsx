@@ -16,7 +16,7 @@ const Dashboard = createBottomTabNavigator<DashboardTabStackProps>();
 
 const DashboardTabStack: FC<DashboardScreenProps> = () => {
   return (
-    <Dashboard.Navigator initialRouteName={Routes.ProfileScreen}>
+    <Dashboard.Navigator initialRouteName={Routes.StatisticScreen}>
       <Dashboard.Screen
         name={Routes.StatisticScreen}
         component={StatisticScreen}

@@ -77,18 +77,28 @@ const TransactionForm: FC<TransactionFormProps> = () => {
     reset();
   };
 
+  const onError = () => {
+    ToastService.show({
+      title: 'Ошибка!',
+      message: 'Что-то пошло не так',
+      type: 'error',
+    });
+  };
+
   const onSubmit = ({ total, category, date }: TransactionFormField) => {
-    const isIncome = Number(total) > 0;
-    const message = `Зафиксирован ${isIncome ? 'доход' : 'расход'}: ${total} рублей`;
+    const validTotal = Math.round(Number(total));
+    const isIncome = validTotal > 0;
+    const message = `Зафиксирован ${isIncome ? 'доход' : 'расход'}: ${validTotal} руб.`;
     mutate(
       {
-        total: Number(total),
+        total: validTotal,
         comment: '',
         category,
         date: getDateByFormat(date, 'YYYY-MM-DD'),
       },
       {
         onSuccess: onSuccess(message),
+        onError: onError,
       },
     );
   };
