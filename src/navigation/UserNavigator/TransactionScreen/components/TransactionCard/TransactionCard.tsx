@@ -1,24 +1,15 @@
 import React, { FC } from 'react';
 import styled, { useTheme } from 'styled-components/native';
-import {
-  FastFood,
-  Food,
-  Travel,
-  Mobile,
-  Medicine,
-  Cloth,
-  Rent,
-  Presents,
-} from '../../../../../components/categoryIcon';
-import { Money } from '../../../../../components/icon';
-import { TransactionResponse, Transaction, Category } from '../../../../../interfaces/transaction';
-import { getDateByFormat } from '../../../../../utils/date';
+import { FastFood, Food, Travel, Mobile, Medicine, Cloth, Rent, Presents } from 'components/categoryIcon';
+import { Money } from 'components/icon';
+import { TransactionResponse, Transaction, Category } from 'interfaces/transaction';
+import { getDateByFormat } from 'utils/date';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { ActivityIndicator, StyleSheet } from 'react-native';
 import { BaseButton } from 'react-native-gesture-handler';
 import { useMutation, useQueryClient } from 'react-query';
-import { deleteTransaction } from '../../../../../api';
-import { queryKeys } from '../../../../../constants/queryKeys';
+import { deleteTransaction } from 'api';
+import { queryKeys } from 'constants/queryKeys';
 
 const icons = {
   [Category.OTHER]: <Money />,
@@ -55,7 +46,7 @@ const TransactionCard: FC<Transaction> = ({ category, date, total, id }) => {
     mutate(id, {
       onSuccess: () => {
         client.setQueriesData(queryKeys.TRANSACTIONS, (old) => {
-          return { ...old, transactions: newData };
+          return { ...(old as Object), transactions: newData };
         });
       },
     });

@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import React, { FC, useState } from 'react';
 import { StyleProp, StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import DatePicker from 'react-native-date-picker';
+import { getDateByFormat } from 'utils/date';
 
 interface DateInputProps {
   date?: Date;
@@ -20,7 +21,7 @@ const DateInput: FC<DateInputProps> = ({ date, onChange, style }) => {
   return (
     <View style={[styles.container, style]}>
       <TouchableOpacity style={styles.btn} onPress={openModal}>
-        <Text style={styles.text}>{date ? dayjs(date).format('DD.MM.YYYY') : 'Выберите дату'}</Text>
+        <Text style={styles.text}>{date ? getDateByFormat(date) : 'Выберите дату'}</Text>
       </TouchableOpacity>
       <DatePicker
         date={date ?? new Date()}

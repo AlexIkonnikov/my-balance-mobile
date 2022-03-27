@@ -8,6 +8,7 @@ import { injectStore } from './src/services/HttpService';
 import SplashScreen from 'react-native-splash-screen';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { PersistGate } from 'redux-persist/integration/react';
+import Toast from 'react-native-toast-message';
 
 injectStore(store);
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => {
         <PersistGate loading={null} persistor={persistor}>
           <ThemeProvider theme={myTheme}>
             <Navigator />
+            <Toast position="top" visibilityTime={3000} />
           </ThemeProvider>
         </PersistGate>
       </Provider>

@@ -38,7 +38,7 @@ const TransactionScreen: FC<TransactionScreenProps> = ({ navigation }) => {
       <Wrapper>
         <Text>Доход: {data?.income}</Text>
         <Text>Расход: {data?.expenses}</Text>
-        <Text>Итого: {data?.income && data?.expenses ? data?.income + data?.expenses : 0}</Text>
+        <Text>Итого: {(data?.income ?? 0) + (data?.expenses ?? 0)}</Text>
       </Wrapper>
       <View style={listWrapper}>
         <FlatList

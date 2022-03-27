@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import React, { FC, useCallback, useEffect, useRef } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Animated, StyleSheet, TextInput, View, Dimensions } from 'react-native';
@@ -9,6 +8,8 @@ import { createTransaction } from 'api';
 import { BaseButton, CategoryPicker, DateInput, NumPad } from 'components';
 import { Category } from 'interfaces/transaction';
 import { TransactionFormProps } from '../UserNavigator';
+import { getDateByFormat } from 'utils/date';
+import { ToastService } from 'services';
 
 type TransactionFormField = {
   total?: string;
@@ -19,12 +20,11 @@ type TransactionFormField = {
 
 const WIDTH = Dimensions.get('window').width;
 
-const TransactionForm: FC<TransactionFormProps> = ({ navigation }) => {
-  const goBack = () => navigation.goBack();
+const TransactionForm: FC<TransactionFormProps> = () => {
   const right = useRef(new Animated.Value(-WIDTH)).current;
   const left = useRef(new Animated.Value(-WIDTH)).current;
   const bottomCoord = useRef(new Animated.Value(0)).current;
-  const { control, getValues, setValue, formState, handleSubmit, trigger } = useForm<TransactionFormField>({
+  const { control, getValues, setValue, formState, handleSubmit, trigger, reset } = useForm<TransactionFormField>({
     mode: 'onChange',
   });
 
@@ -69,22 +69,26 @@ const TransactionForm: FC<TransactionFormProps> = ({ navigation }) => {
     };
   }, [runAnimation]);
 
+  const onSuccess = (message: string) => () => {
+    ToastService.show({
+      title: 'Успех',
+      message,
+    });
+    reset();
+  };
+
   const onSubmit = ({ total, category, date }: TransactionFormField) => {
-    runAnimation(-WIDTH);
-    Animated.timing(bottomCoord, {
-      toValue: -1000,
-      duration: 400,
-      useNativeDriver: false,
-    }).start();
+    const isIncome = Number(total) > 0;
+    const message = `Зафиксирован ${isIncome ? 'доход' : 'расход'}: ${total} рублей`;
     mutate(
       {
         total: Number(total),
         comment: '',
         category,
-        date: dayjs(date).format('YYYY-MM-DD'),
+        date: getDateByFormat(date, 'YYYY-MM-DD'),
       },
       {
-        onSuccess: goBack,
+        onSuccess: onSuccess(message),
       },
     );
   };
