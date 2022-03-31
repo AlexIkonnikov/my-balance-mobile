@@ -33,6 +33,8 @@ const CategoryPicker: FC<CategoryPickerProps> = ({ value, onChange, style }) => 
         items={items}
         value={value}
         useNativeAndroidPickerStyle={false}
+        fixAndroidTouchableBug={true}
+        textInputProps={{ numberOfLines: 1 }}
         style={{
           inputAndroid: styles.input,
           inputIOS: styles.input,
@@ -52,7 +54,7 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: 'white',
     color: 'black',
-    padding: 5,
+    paddingVertical: 10,
     borderRadius: 10,
     fontSize: 15,
     textAlign: 'center',
