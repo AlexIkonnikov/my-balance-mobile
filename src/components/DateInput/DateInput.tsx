@@ -1,8 +1,7 @@
-import dayjs from 'dayjs';
 import React, { FC, useState } from 'react';
 import { StyleProp, StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
-import DatePicker from 'react-native-date-picker';
 import { getDateByFormat } from 'utils/date';
+import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 
 interface DateInputProps {
   date?: Date;
@@ -13,9 +12,11 @@ interface DateInputProps {
 const DateInput: FC<DateInputProps> = ({ date, onChange, style }) => {
   const [show, setShow] = useState(false);
   const openModal = () => setShow(true);
-  const onConfirm = (value: Date) => {
-    onChange(value);
+  const onConfirm = (_event: DateTimePickerEvent, value?: Date) => {
     setShow(false);
+    if (value) {
+      onChange(value);
+    }
   };
 
   return (
@@ -23,17 +24,7 @@ const DateInput: FC<DateInputProps> = ({ date, onChange, style }) => {
       <TouchableOpacity style={styles.btn} onPress={openModal}>
         <Text style={styles.text}>{date ? getDateByFormat(date) : 'Выберите дату'}</Text>
       </TouchableOpacity>
-      <DatePicker
-        date={date ?? new Date()}
-        modal
-        mode="date"
-        cancelText="Отмена"
-        confirmText="Выбрать"
-        title="Выберите дату"
-        open={show}
-        onConfirm={onConfirm}
-        onCancel={() => setShow(false)}
-      />
+      {show && <DateTimePicker value={date ?? new Date()} onChange={onConfirm} mode="date" />}
     </View>
   );
 };
@@ -44,7 +35,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     backgroundColor: 'white',
-    padding: 10,
+    padding: 15,
     borderRadius: 10,
   },
   text: {

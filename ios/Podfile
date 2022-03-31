@@ -20,6 +20,8 @@ target 'balance' do
 
   pod 'RNCPicker', :path => '../node_modules/@react-native-picker/picker'
 
+  pod 'RNDateTimePicker', :path => '../node_modules/@react-native-community/datetimepicker'
+
   target 'balanceTests' do
     inherit! :complete
     # Pods for testing

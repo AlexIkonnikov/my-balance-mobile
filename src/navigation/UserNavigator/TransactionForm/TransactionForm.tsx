@@ -2,7 +2,7 @@ import React, { FC, useCallback, useEffect, useRef } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Animated, StyleSheet, TextInput, View, Dimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { onChangeMiddleware } from 'components/NumPad';
 import { createTransaction } from 'api';
 import { BaseButton, CategoryPicker, DateInput, NumPad } from 'components';
@@ -10,6 +10,7 @@ import { Category } from 'interfaces/transaction';
 import { TransactionFormProps } from '../UserNavigator';
 import { getDateByFormat } from 'utils/date';
 import { ToastService } from 'services';
+import { queryKeys } from 'constants/queryKeys';
 
 type TransactionFormField = {
   total?: string;
@@ -21,10 +22,11 @@ type TransactionFormField = {
 const WIDTH = Dimensions.get('window').width;
 
 const TransactionForm: FC<TransactionFormProps> = () => {
+  const client = useQueryClient();
   const right = useRef(new Animated.Value(-WIDTH)).current;
   const left = useRef(new Animated.Value(-WIDTH)).current;
   const bottomCoord = useRef(new Animated.Value(0)).current;
-  const { control, getValues, setValue, formState, handleSubmit, trigger, reset } = useForm<TransactionFormField>({
+  const { control, getValues, setValue, formState, handleSubmit, trigger, resetField } = useForm<TransactionFormField>({
     mode: 'onChange',
   });
 
@@ -74,7 +76,8 @@ const TransactionForm: FC<TransactionFormProps> = () => {
       title: 'Успех',
       message,
     });
-    reset();
+    resetField('total');
+    client.invalidateQueries(queryKeys.TRANSACTIONS);
   };
 
   const onError = () => {
