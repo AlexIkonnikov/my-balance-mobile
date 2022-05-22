@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import React, { FC } from 'react';
-import { FlatList, ListRenderItem, StyleSheet, Text, View } from 'react-native';
+import { FlatList, ListRenderItem, StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { useQuery } from 'react-query';
 import styled from 'styled-components/native';
 import { getTransactionPerMounth } from 'api';
@@ -41,6 +41,7 @@ const TransactionScreen: FC<TransactionScreenProps> = ({ navigation }) => {
 
   return (
     <Contaner>
+      <SafeAreaView />
       <Title>За текущий месяц:</Title>
       <Wrapper>
         <View style={row}>
