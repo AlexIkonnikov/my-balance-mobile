@@ -40,7 +40,7 @@ const WelcomeScreen: FC<WelcomeScreenProps> = ({ navigation }) => {
 
   return (
     <Container>
-      <LottieView source={money} autoPlay={true} progress={1} style={styles.lottie} />
+      <LottieView source={money} autoPlay={true} loop={false} style={styles.lottie} />
       <Animated.View style={{ transform: [{ translateX: left }] }}>
         <Greetings>Здравствуйте, </Greetings>
       </Animated.View>
