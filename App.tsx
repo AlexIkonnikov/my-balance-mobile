@@ -5,10 +5,10 @@ import { myTheme } from './src/theme/theme';
 import { Provider } from 'react-redux';
 import store, { persistor } from './src/store/store';
 import { injectStore } from './src/services/HttpService';
-import SplashScreen from 'react-native-splash-screen';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { PersistGate } from 'redux-persist/integration/react';
 import Toast from 'react-native-toast-message';
+import SplashScreen from 'react-native-lottie-splash-screen';
 
 injectStore(store);
 const queryClient = new QueryClient();

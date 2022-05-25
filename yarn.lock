@@ -6034,6 +6034,11 @@ react-native-gesture-handler@^2.3.0:
     lodash "^4.17.21"
     prop-types "^15.7.2"
 
+react-native-lottie-splash-screen@^0.1.14:
+  version "0.1.14"
+  resolved "https://registry.yarnpkg.com/react-native-lottie-splash-screen/-/react-native-lottie-splash-screen-0.1.14.tgz#b8168556c695524f85383ba07dfc979c17e3d6c8"
+  integrity sha512-Y81UHnvJy7/dbkmZv6M3q4nz8PG9cG7HqAfYhPC2+RG31/wqFsKzCnj+MLg6dGuCuUSuqJRIQUeM+S5GWNkOcA==
+
 react-native-picker-select@^8.0.4:
   version "8.0.4"
   resolved "https://registry.npmjs.org/react-native-picker-select/-/react-native-picker-select-8.0.4.tgz"
@@ -6061,11 +6066,6 @@ react-native-screens@^3.13.1:
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
-
-react-native-splash-screen@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.npmjs.org/react-native-splash-screen/-/react-native-splash-screen-3.3.0.tgz"
-  integrity sha512-rGjt6HkoSXxMqH4SQUJ1gnPQlPJV8+J47+4yhgTIan4bVvAwJhEeJH7wWt9hXSdH4+VfwTS0GTaflj1Tw83IhA==
 
 react-native-svg@^12.3.0:
   version "12.3.0"
