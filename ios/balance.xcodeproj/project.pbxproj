@@ -12,6 +12,8 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		6172F2D35A4C3AA820D92908 /* libPods-balance.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-balance.a */; };
+		7B25C538283E487F00CAC137 /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B25C537283E487F00CAC137 /* Dynamic.swift */; };
+		7B25C53B283E4AE600CAC137 /* RNSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B25C53A283E4AE600CAC137 /* RNSplashScreen.m */; };
 		7EF68E3733C33B6898317E18 /* libPods-balance-balanceTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-balance-balanceTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -39,6 +41,10 @@
 		1D0AE47A65C8663E3B452821 /* Pods-balance-balanceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-balance-balanceTests.release.xcconfig"; path = "Target Support Files/Pods-balance-balanceTests/Pods-balance-balanceTests.release.xcconfig"; sourceTree = "<group>"; };
 		6423831EA8574132BED9D8CC /* libPods-balance.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-balance.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C97AB639B58BBB4B15BBE30 /* Pods-balance-balanceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-balance-balanceTests.debug.xcconfig"; path = "Target Support Files/Pods-balance-balanceTests/Pods-balance-balanceTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7B25C537283E487F00CAC137 /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
+		7B25C539283E4A3400CAC137 /* RNSplashScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSplashScreen.h; sourceTree = "<group>"; };
+		7B25C53A283E4AE600CAC137 /* RNSplashScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSplashScreen.m; sourceTree = "<group>"; };
+		7B782DCB283E3E0F00F6FDA5 /* balance-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "balance-Bridging-Header.h"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = balance/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ABFE59519B596E51CEFDCCC0 /* libPods-balance-balanceTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-balance-balanceTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0A881CF5CF3F2B244570E2A /* Pods-balance.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-balance.debug.xcconfig"; path = "Target Support Files/Pods-balance/Pods-balance.debug.xcconfig"; sourceTree = "<group>"; };
@@ -86,12 +92,16 @@
 		13B07FAE1A68108700A75B9A /* balance */ = {
 			isa = PBXGroup;
 			children = (
+				7B782DCB283E3E0F00F6FDA5 /* balance-Bridging-Header.h */,
+				7B25C537283E487F00CAC137 /* Dynamic.swift */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				7B25C539283E4A3400CAC137 /* RNSplashScreen.h */,
+				7B25C53A283E4AE600CAC137 /* RNSplashScreen.m */,
 			);
 			name = balance;
 			sourceTree = "<group>";
@@ -145,7 +155,6 @@
 				6C97AB639B58BBB4B15BBE30 /* Pods-balance-balanceTests.debug.xcconfig */,
 				1D0AE47A65C8663E3B452821 /* Pods-balance-balanceTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -208,7 +217,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1320;
 					};
 				};
 			};
@@ -411,7 +420,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B25C538283E487F00CAC137 /* Dynamic.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				7B25C53B283E4AE600CAC137 /* RNSplashScreen.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -431,6 +442,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6C97AB639B58BBB4B15BBE30 /* Pods-balance-balanceTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -458,6 +470,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1D0AE47A65C8663E3B452821 /* Pods-balance-balanceTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = balanceTests/Info.plist;

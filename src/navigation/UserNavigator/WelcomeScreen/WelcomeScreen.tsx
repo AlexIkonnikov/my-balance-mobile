@@ -1,31 +1,34 @@
 import React, { FC, useCallback, useEffect, useRef } from 'react';
-import { Animated, Dimensions } from 'react-native';
+import { Animated, Dimensions, StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 import { useAppSelector } from 'hooks';
 import { userSelectors } from 'store/user';
 import Routes from 'navigation/routes';
 import { WelcomeScreenProps } from '../UserNavigator';
+import LottieView from 'lottie-react-native';
+
+const money = require('./../../../components/Lottie/money.json');
 
 const HEIGHT = Dimensions.get('screen').height;
 
 const WelcomeScreen: FC<WelcomeScreenProps> = ({ navigation }) => {
   const { name, patronymic } = useAppSelector(userSelectors.selectName);
 
-  const top = useRef(new Animated.Value(-HEIGHT)).current;
-  const bottom = useRef(new Animated.Value(-HEIGHT)).current;
+  const left = useRef(new Animated.Value(-HEIGHT)).current;
+  const right = useRef(new Animated.Value(HEIGHT)).current;
 
   const runAnimation = useCallback(() => {
-    Animated.timing(top, {
+    Animated.timing(left, {
       toValue: 0,
       duration: 1000,
-      useNativeDriver: false,
+      useNativeDriver: true,
     }).start();
-    Animated.timing(bottom, {
+    Animated.timing(right, {
       toValue: 0,
       duration: 1000,
-      useNativeDriver: false,
+      useNativeDriver: true,
     }).start();
-  }, [top, bottom]);
+  }, [left, right]);
 
   useEffect(() => {
     runAnimation();
@@ -37,10 +40,11 @@ const WelcomeScreen: FC<WelcomeScreenProps> = ({ navigation }) => {
 
   return (
     <Container>
-      <Animated.View style={{ top }}>
+      <LottieView source={money} autoPlay={true} loop={false} style={styles.lottie} />
+      <Animated.View style={{ transform: [{ translateX: left }] }}>
         <Greetings>Здравствуйте, </Greetings>
       </Animated.View>
-      <Animated.View style={{ bottom }}>
+      <Animated.View style={{ transform: [{ translateX: right }] }}>
         <Greetings>
           {name} {patronymic}
         </Greetings>
@@ -63,5 +67,16 @@ const Greetings = styled.Text`
   font-weight: bold;
   text-align: center;
 `;
+
+const styles = StyleSheet.create({
+  lottie: {
+    flex: 1,
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    position: 'absolute',
+  },
+});
 
 export default WelcomeScreen;
