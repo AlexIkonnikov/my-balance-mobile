@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
-import React, { FC } from 'react';
-import { FlatList, ListRenderItem, StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import React, { FC, useState } from 'react';
+import { FlatList, ListRenderItem, StyleSheet, Text, View, SafeAreaView, Dimensions } from 'react-native';
 import { useQuery } from 'react-query';
 import styled from 'styled-components/native';
 import { getTransactionPerMounth } from 'api';
@@ -11,6 +11,21 @@ import { TransactionCard } from './components/TransactionCard';
 
 import { TransactionScreenProps } from './../UserNavigator';
 import Routes from 'navigation/routes';
+import Animated, {
+  useAnimatedScrollHandler,
+  useAnimatedGestureHandler,
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+  runOnJS,
+  Easing,
+  withTiming,
+} from 'react-native-reanimated';
+import { PanGestureHandler } from 'react-native-gesture-handler';
+
+const { height } = Dimensions.get('screen');
+
+const hgt = Math.round(height / 2);
 
 const TransactionScreen: FC<TransactionScreenProps> = ({ navigation }) => {
   const currentDate = dayjs();
@@ -39,6 +54,36 @@ const TransactionScreen: FC<TransactionScreenProps> = ({ navigation }) => {
     return (data?.income ?? 0) + (data?.expenses ?? 0) > 0 ? green : red;
   };
 
+  const [enable, setEnable] = useState(true);
+  const topPosition = useSharedValue(hgt);
+
+  const listStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateY: topPosition.value }],
+      left: 0,
+      right: 0,
+      bottom: 0,
+    };
+  });
+
+  const onGestureEvent = useAnimatedGestureHandler({
+    onStart: (_, context: { startTop: number }) => {
+      context.startTop = topPosition.value;
+    },
+    onActive: (event, context: { startTop: number }) => {
+      topPosition.value = context.startTop + event.translationY;
+    },
+    onEnd: () => {
+      if (topPosition.value < hgt + 50) {
+        topPosition.value = withTiming(0, {}, () => {
+          runOnJS(setEnable)(false);
+        });
+      } else {
+        topPosition.value = withTiming(hgt);
+      }
+    },
+  });
+
   return (
     <Contaner>
       <SafeAreaView />
@@ -57,21 +102,23 @@ const TransactionScreen: FC<TransactionScreenProps> = ({ navigation }) => {
           <Text style={[text, color()]}>{(data?.income ?? 0) + (data?.expenses ?? 0)}</Text>
         </View>
       </Wrapper>
-      <View style={listWrapper}>
-        <FlatList
-          data={data?.transactions}
-          style={list}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id + ' '}
-          onRefresh={refetch}
-          refreshing={isLoading}
-          ItemSeparatorComponent={() => <Separator />}
-          ListEmptyComponent={listEmptyComponent}
-          showsVerticalScrollIndicator={false}
-          onResponderEnd={() => refetch()}
-        />
-        <AddButton title="+" onPress={showTransactionForm} />
-      </View>
+      <PanGestureHandler enabled={enable} onGestureEvent={onGestureEvent}>
+        <Animated.View style={[listWrapper, listStyle]}>
+          <Animated.FlatList
+            data={data?.transactions}
+            style={list}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id + ' '}
+            onRefresh={refetch}
+            refreshing={isLoading}
+            ItemSeparatorComponent={() => <Separator />}
+            ListEmptyComponent={listEmptyComponent}
+            showsVerticalScrollIndicator={false}
+            onResponderEnd={() => refetch()}
+          />
+        </Animated.View>
+      </PanGestureHandler>
+      <AddButton title="+" onPress={showTransactionForm} />
     </Contaner>
   );
 };
@@ -88,6 +135,8 @@ const { list, listWrapper, row, text, green, red } = StyleSheet.create({
   },
   listWrapper: {
     flex: 1,
+    height: height,
+    justifyContent: 'flex-end',
     paddingTop: 15,
     paddingHorizontal: 5,
     backgroundColor: 'white',
