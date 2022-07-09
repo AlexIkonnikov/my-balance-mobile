@@ -1,62 +1,86 @@
-import React, { FC } from 'react';
-import { Text, Dimensions, StyleSheet, View } from 'react-native';
+import React, { FC, useCallback, useState } from 'react';
+import { Text, StyleSheet, FlatList, ListRenderItem, LayoutChangeEvent } from 'react-native';
 import { BorderlessButton } from 'react-native-gesture-handler';
 import Backspace from '../icon/Backspace';
 
-const { width } = Dimensions.get('window');
-
-const btnWidth = width / 3;
-
 const pads = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '0', '+', '.', '<'];
-
-const GAP = 40;
 
 interface NumPadProps {
   onTap: (simbol: string) => void;
 }
 
-const NumPad: FC<NumPadProps> = ({ onTap, children }) => {
-  const extraButtons = React.Children.toArray(children);
+interface IButtonProps {
+  key: string;
+  text: string;
+  height: number;
+  width: number;
+}
+
+const keyExtractor = (item: IButtonProps) => item.key;
+
+const NumPad: FC<NumPadProps> = ({ onTap }) => {
+  const [buttons, setButtons] = useState<IButtonProps[]>([]);
+  console.log(buttons);
+  const renderItem: ListRenderItem<typeof buttons[0]> = ({ item: { width, height, text } }) => {
+    return (
+      <BorderlessButton
+        style={[
+          styles.btn,
+          {
+            width,
+            height,
+          },
+        ]}
+        onPress={handleTap(text)}>
+        {text === '<' ? <Backspace /> : <Text style={styles.text}>{text}</Text>}
+      </BorderlessButton>
+    );
+  };
+
+  const onListLayout = useCallback(
+    ({
+      nativeEvent: {
+        layout: { height, width },
+      },
+    }: LayoutChangeEvent) => {
+      setButtons(
+        pads.map((item, index) => ({
+          key: `${item}${index}`,
+          text: item,
+          height: height / 5,
+          width: width / 3,
+        })) as never,
+      );
+    },
+    [],
+  );
+
   const handleTap = (simbol: string) => () => {
     onTap(simbol);
   };
 
   return (
-    <>
-      <View style={styles.wrapper}>
-        {pads.map((text) => {
-          return (
-            <BorderlessButton key={text} style={styles.btn} onPress={handleTap(text)}>
-              {text === '<' ? <Backspace /> : <Text style={styles.text}>{text}</Text>}
-            </BorderlessButton>
-          );
-        })}
-        {extraButtons.map((item) => (
-          <View key={item.toLocaleString()} style={styles.btn}>
-            {item}
-          </View>
-        ))}
-      </View>
-    </>
+    <FlatList
+      data={buttons}
+      style={styles.pad}
+      renderItem={renderItem}
+      keyExtractor={keyExtractor}
+      scrollEnabled={false}
+      numColumns={3}
+      onLayout={onListLayout}
+      showsVerticalScrollIndicator={false}
+    />
   );
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flexGrow: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexWrap: 'wrap',
+  pad: {
+    flex: 1,
   },
   btn: {
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: 'white',
-    margin: 5,
-    width: btnWidth - GAP,
-    height: btnWidth - GAP,
-    borderRadius: btnWidth - GAP / 2,
+    color: 'black',
   },
   text: {
     color: 'black',

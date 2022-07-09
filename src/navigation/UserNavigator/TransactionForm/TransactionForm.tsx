@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useEffect, useRef } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Animated, StyleSheet, TextInput, View, Dimensions } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useMutation, useQueryClient } from 'react-query';
 import { onChangeMiddleware } from 'components/NumPad';
 import { createTransaction } from 'api';
@@ -108,6 +108,7 @@ const TransactionForm: FC<TransactionFormProps> = () => {
 
   return (
     <View style={styles.flex}>
+      <SafeAreaView />
       <View style={styles.container}>
         <Animated.View style={[styles.pickerWrapper, { right }]}>
           <Controller
@@ -144,15 +145,13 @@ const TransactionForm: FC<TransactionFormProps> = () => {
             rules={{ required: true }}
           />
         </Animated.View>
-        <Animated.View style={{ bottom: bottomCoord }}>
-          <NumPad onTap={handleTap} />
-          <BaseButton
-            title="Отправить"
-            disabled={!formState.isValid || isLoading}
-            style={[{ paddingBottom: bottom + 30 }, styles.btn]}
-            onPress={handleSubmit(onSubmit)}
-          />
-        </Animated.View>
+        <NumPad onTap={handleTap} />
+        <BaseButton
+          title="Отправить"
+          disabled={!formState.isValid || isLoading}
+          style={[{ paddingBottom: bottom + 30 }, styles.btn]}
+          onPress={handleSubmit(onSubmit)}
+        />
       </View>
     </View>
   );
@@ -164,12 +163,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    flex: 1,
+    padding: 20,
   },
   container: {
     flex: 1,
     justifyContent: 'flex-end',
-    padding: 20,
     paddingBottom: 0,
   },
   input: {
@@ -177,6 +175,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     color: 'black',
+    marginBottom: 20,
   },
   pr5: {
     paddingRight: 5,
