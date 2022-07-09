@@ -1,3 +1,11 @@
+//
+//  Dynamic.swift
+//  balance
+//
+//  Created by Mac-user 7 on 09.07.2022.
+//
+
+import Foundation
 import UIKit
 import Foundation
 import Lottie

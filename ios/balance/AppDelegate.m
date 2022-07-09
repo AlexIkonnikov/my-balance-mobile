@@ -49,9 +49,17 @@ static void InitializeFlipper(UIApplication *application) {
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
   rootViewController.view = rootView;
+  
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  [RNSplashScreen show];
+  
+  Dynamic *t = [Dynamic new];
+  UIView *animationUIView = (UIView *)[t createAnimationViewWithRootView:rootView lottieName:@"loading"];
+  
+  [RNSplashScreen showLottieSplash:animationUIView inRootView:rootView];
+  AnimationView *animationView = (AnimationView *) animationUIView;
+  [t playWithAnimationView:animationView];
+  [RNSplashScreen setAnimationFinished:true];
   return YES;
 }
 
